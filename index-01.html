@@ -8,26 +8,24 @@
   </head>
   <body class="h-screen">
     <div id="app" class="h-full grid place-items-center">
-      <button
-        :class="active ? 'text-green-400' : 'text-red-500'"
-        @click="toggle"
-        class="border bg-gray-100 shadow-lg p-2"
-      >
-        Click Me!
-      </button>
+      <p>
+        <input type="text" v-model="greeting" />
+      </p>
+      <p>{{ greeting }} ({{ greeting.length}})</p>
     </div>
 
     <script>
       Vue.createApp({
         data() {
           return {
-            active: false,
+            greeting: 'hello world from rewa.',
           };
         },
-        methods: {
-          toggle() {
-            this.active = !this.active;
-          },
+
+        mounted() {
+          setTimeout(() => {
+            this.greeting = 'Changed';
+          }, 3000);
         },
       }).mount('#app');
     </script>
