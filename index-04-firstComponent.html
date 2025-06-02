@@ -5,54 +5,43 @@
     <title>Document</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+      @keyframes spinner {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .is-loading {
+        color: transparent;
+      }
+      .is-loading::before {
+        content: '';
+        box-sizing: border-box;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 24px;
+        height: 24px;
+        margin-top: -12px;
+        margin-left: -12px;
+        border-radius: 50%;
+        border: 1px solid #f6f;
+        border-top-color: #0e0;
+        border-right-color: #0dd;
+        border-bottom-color: #f90;
+        animation: spinner 600ms linear infinite;
+      }
+    </style>
   </head>
   <body class="h-screen">
-    <div id="app" class="h-full grid place-items-center">
-      <section v-show="inProgressAssignments.length">
-        <h2 class="font-bold mb-2">In Progress Assignemnts</h2>
-        <ul>
-          <li v-for="assignment in inProgressAssignments" :key="assignment.id">
-            <label>
-              {{ assignment.name }}
-              <input type="checkbox" v-model="assignment.complete" />
-            </label>
-          </li>
-        </ul>
-      </section>
-      <section v-show="completedAssignments.length">
-        <h2 class="font-bold mb-2">Completed Assignemnts</h2>
-        <ul>
-          <li v-for="assignment in completedAssignments" :key="assignment.id">
-            <label>
-              {{ assignment.name }}
-              <input type="checkbox" v-model="assignment.complete" />
-            </label>
-          </li>
-        </ul>
-      </section>
+    <div id="app" class="h-full flex items-center justify-center gap-2">
+      <app-button type="primary">Submit</app-button>
+      <app-button type="secondary">Click Me!</app-button>
+      <app-button type="muted" :processing="true">Bijacz..</app-button>
     </div>
-    <script>
-      let app = {
-        data() {
-          return {
-            assignments: [
-              { name: 'Finish project', complete: false, id: 1 },
-              { name: 'Read chapter', complete: false, id: 2 },
-              { name: 'Turn in homework', complete: false, id: 3 },
-            ],
-          };
-        },
-        computed: {
-          completedAssignments() {
-            return this.assignments.filter((assignment) => assignment.complete);
-          },
-          inProgressAssignments() {
-            return this.assignments.filter((assignment) => !assignment.complete);
-          },
-        },
-      };
-
-      Vue.createApp(app).mount('#app');
+    <script type="module">
+      import App from './js/components/App.js';
+      Vue.createApp(App).mount('#app');
     </script>
   </body>
 </html>
