@@ -1,8 +1,8 @@
 export default {
   template: `
-    <div class="flex gap-2 mb -4">
+    <div class="flex gap-2 mb-4">
         <button 
-          @click="$emit('change', tag)"
+          @click="$emit('update:currentTag', tag)"
           v-for="tag in tags" 
           class="border border-white rounded px-2 text-xs hover:bg-white hover:text-black"
           :class="{
@@ -16,7 +16,7 @@ export default {
     initialTags: Array,
     currentTag: String,
   },
-  emits: ['change'],
+  emits: ['update:currentTag'],
   computed: {
     tags() {
       return ['all', ...new Set(this.initialTags)];
