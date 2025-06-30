@@ -1,0 +1,9 @@
+{
+  "assignments": [
+    { "name": "Finish project Qpix", "complete": false, "id": 1, "tag": "science" },
+    { "name": "Read chapter Squirrle", "complete": false, "id": 2, "tag": "math" },
+    { "name": "Turn in homework Bad", "complete": false, "id": 3, "tag": "math" },
+    { "name": "PhpUnit Testing", "complete": true, "id": 4, "tag": "programming" },
+    { "name": "Vue.js", "complete": false, "id": 5, "tag": "programming" }
+  ]
+}

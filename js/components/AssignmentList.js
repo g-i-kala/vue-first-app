@@ -1,30 +1,38 @@
 import Assignment from './Assignment.js';
 import AssignmentTags from './AssignmentTags.js';
 import Tags from './AssignmentTags.js';
+import Card from './Card.js';
 
 export default {
-  components: { Assignment, AssignmentTags },
+  components: { Assignment, AssignmentTags, Card },
   template: `
-    <section v-show="assignments.length">
-      <h2 class="font-bold mb-2">{{ title }}
-      <span>({{ assignments.length }})</span>
-      </h2>
-      <assignment-tags 
-        v-model:currentTag="currentTag"  
-        :initial-tags="assignments.map(a => a.tag)">
-      </assignment-tags>
-      <ul class="border border-gray-600 divide-gray-600">
-        <assignment 
-          v-for="assignment in filteredAssignments" 
-          :key="assignment.id"
-          :assignment="assignment">
-        </assignment>
-      </ul>
-    </section>
+    <card>
+      <section v-show="assignments.length" class="w-60">
+        <div class="flex justify-between items-start">
+          <h2 class="font-bold mb-2">{{ title }}
+          <span>({{ assignments.length }})</span>
+          </h2>
+          <button v-show="canToggle" @click="$emit('toggle')">&times;</button>
+        </div>
+        <assignment-tags
+          v-model:currentTag="currentTag"
+          :initial-tags="assignments.map(a => a.tag)">
+        </assignment-tags>
+        <ul class="border border-gray-600 divide-gray-600">
+          <assignment
+            v-for="assignment in filteredAssignments"
+            :key="assignment.id"
+            :assignment="assignment">
+          </assignment>
+        </ul>
+        <slot></slot>
+      </section>
+    </card>
   `,
   props: {
     assignments: Array,
     title: String,
+    canToggle: { type: Boolean, default: false },
   },
 
   data() {
